@@ -1,0 +1,65 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+void solveSudoku(vector<vector<char>>& board) 
+{
+	int i,j,k,m,n;
+	for(i=0;i<board.size();i++)
+	{
+		for(j=0;j<board[i].size();j++)
+		{
+			if(board[i][j]=='.')
+			{
+				for(k=49;k<=57;k++)
+				{
+					flag=0;
+					for(m=0;m<board[i].size();m++)
+					if(board[i][m]==k)
+					{
+						flag=1;
+						break;
+					}
+					if(flag==0)
+					{
+						for(m=0;m<9;m++)
+						{
+							if(board[m][j]==k)
+							{
+								flag=1;
+								break;
+							}
+						}
+					}
+					if(flag==0)
+					{
+						for(m=3*(i/3);m<3*(i/3)+3;m++)
+						{
+							for(n=3*(j/3);n<3*(j/3)+3;n++)
+							{
+								if(board[m][n]==k)
+								{
+									flag=1;
+									break;
+								}
+							}
+						}
+					}
+					if(flag==1)
+					break;
+				}
+				board[i][j]=k;
+				solveSudoku(board);
+				board[i][j]='.';
+			}
+		}
+		if(i==9&&j==9)
+		{
+			cout<<"mm"<<endl;
+		}
+	}
+}
+int main()
+{
+	
+}
